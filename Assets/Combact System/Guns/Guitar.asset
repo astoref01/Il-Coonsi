@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea7301d1c341f36478e6140cdbb9ca03, type: 3}
+  m_Name: Guitar
+  m_EditorClassIdentifier: 
+  ImpactType: {fileID: 11400000, guid: c50f6f80c300615438adeba37e2ea508, type: 2}
+  DamageConfig: {fileID: 11400000, guid: 68cff8018f1f34ad6bf352dcaeb6c3ff, type: 2}
+  Type: 2
+  Name: Guitar
+  ModelPrefab: {fileID: 1027854764920523238, guid: 3a4f3fbeb61014457a62785c20610d41, type: 3}
+  SpawnPoint: {x: -0.122741, y: 0.3351949, z: -0.258399}
+  SpawnRotation: {x: 1.998, y: -48.712, z: -90.113}
+  ShootConfig: {fileID: 11400000, guid: a5118c67d1f694cd5bf75e624b5b05c8, type: 2}
+  TrailConfig: {fileID: 11400000, guid: 0a6d6d17edc3341d6898af411b081778, type: 2}
+  audioConfig: {fileID: 11400000, guid: 26ca3b099eca84f1a9c40b0da1da0aea, type: 2}
