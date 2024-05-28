@@ -23,6 +23,8 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         int damageTaken = Mathf.Clamp(Damage, 0, CurrentHealth);
 
         CurrentHealth -= damageTaken;
+
+        Debug.Log(damageTaken);
         
         if (damageTaken != 0)
         {
