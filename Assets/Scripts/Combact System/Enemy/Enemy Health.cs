@@ -13,6 +13,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     public event IDamageable.TakeDamageEvent OnTakeDamage;
     public event IDamageable.DeathEvent OnDeath;
 
+
     private void OnEnable()
     {
         _Health = MaxHealth;
@@ -35,5 +36,10 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         {
             OnDeath?.Invoke(transform.position);
         }
+    }
+
+    public Transform GetTransform()
+    {
+        throw new System.NotImplementedException();
     }
 }
