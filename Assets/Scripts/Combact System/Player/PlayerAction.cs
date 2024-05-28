@@ -9,8 +9,7 @@ public class PlayerAction : MonoBehaviour
 
     private void Update()
     {
-        if (Mouse.current.leftButton.isPressed
-            && GunSelector.ActiveGun != null)
+        if (GunSelector.ActiveGun != null)
         {
             GunSelector.ActiveGun.Shoot();
         }
