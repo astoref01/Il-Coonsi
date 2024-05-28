@@ -5,7 +5,7 @@ public class CombatState : State
     float gravityValue;
     Vector3 currentVelocity;
     bool grounded;
-    bool sheathWeapon;
+    //bool sheathWeapon;
     float playerSpeed;
     bool attack;
 
@@ -21,7 +21,7 @@ public class CombatState : State
     {
         base.Enter();
 
-        sheathWeapon = false;
+        //sheathWeapon = false;
         input = Vector2.zero;
         currentVelocity = Vector3.zero;
         gravityVelocity.y = 0;
@@ -37,10 +37,10 @@ public class CombatState : State
     {
         base.HandleInput();
 
-        if (drawWeaponAction.triggered)
-        {
-            sheathWeapon = true;
-        }
+        //if (drawWeaponAction.triggered)
+        //{
+        //    sheathWeapon = true;
+        //}
 
         if (attackAction.triggered)
         {
@@ -60,11 +60,11 @@ public class CombatState : State
 
         character.animator.SetFloat("speed", input.magnitude, character.speedDampTime, Time.deltaTime);
 
-        if (sheathWeapon)
-        {
-            character.animator.SetTrigger("sheathWeapon");
-            stateMachine.ChangeState(character.standing);
-        }
+        //if (sheathWeapon)
+        //{
+        //    character.animator.SetTrigger("sheathWeapon");
+        //    stateMachine.ChangeState(character.standing);
+        //}
 
         if (attack)
         {
