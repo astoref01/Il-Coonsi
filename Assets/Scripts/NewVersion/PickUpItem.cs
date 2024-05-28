@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PickUpItem : Interactable
 {
-	[Header("Item Data")]	
+	//[Header("Item Data")]	
 	[SerializeField] string itemName;
 	public Item Item;
     //[SerializeField] int amount = 1;
