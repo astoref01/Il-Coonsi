@@ -7,13 +7,13 @@ public class EnemyMovement : MonoBehaviour
 {
     public Transform Player;
     public float UpdateRate = 0.1f;
-    public float StoppingDistance = 2.0f; // Distance from the player to stop
-
+    public float StoppingDistance = 9.0f; // Distanza desiderata da mantenere dal giocatore
     private NavMeshAgent Agent;
 
     private void Awake()
     {
         Agent = GetComponent<NavMeshAgent>();
+        Agent.stoppingDistance = StoppingDistance; // Imposta la distanza di arresto del NavMeshAgent
     }
 
     private void Start()
@@ -28,10 +28,12 @@ public class EnemyMovement : MonoBehaviour
         while (gameObject.activeSelf)
         {
             Vector3 directionToPlayer = Player.position - transform.position;
-            Vector3 destination = Player.position - directionToPlayer.normalized * StoppingDistance;
+            Vector3 targetPosition = Player.position - directionToPlayer.normalized * StoppingDistance;
 
-            Agent.SetDestination(destination);
-
+            if (directionToPlayer.magnitude > StoppingDistance)
+            {
+                Agent.SetDestination(targetPosition);
+            }
             yield return Wait;
         }
     }
