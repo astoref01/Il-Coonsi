@@ -6,7 +6,7 @@ public class Character : MonoBehaviour
     public float playerSpeed = 5.0f;
     public float crouchSpeed = 2.0f;
     public float sprintSpeed = 7.0f;
-    public float jumpHeight = 0.8f; 
+    public float jumpHeight = 0.8f;
     public float gravityMultiplier = 2;
     public float rotationSpeed = 5f;
     public float crouchColliderHeight = 1.35f;
@@ -81,5 +81,23 @@ public class Character : MonoBehaviour
     private void FixedUpdate()
     {
         movementSM.currentState.PhysicsUpdate();
+    }
+
+    public void EnterCombat()
+    {
+        if (movementSM.currentState != combatting)
+        {
+            movementSM.ChangeState(combatting);
+            animator.SetTrigger("drawWeapon");
+        }
+    }
+
+    public void ExitCombat()
+    {
+        if (movementSM.currentState == combatting)
+        {
+            movementSM.ChangeState(standing);
+            animator.SetTrigger("sheatWeapon");
+        }
     }
 }
