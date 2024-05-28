@@ -9,6 +9,7 @@ public class EnemyMovement : MonoBehaviour
     public float UpdateRate = 0.1f;
     private NavMeshAgent Agent;
 
+    public float DestinationOffset = 5.0f;
 
     private void Awake()
     {
@@ -26,7 +27,17 @@ public class EnemyMovement : MonoBehaviour
 
         while (gameObject.activeSelf)
         {
-            Agent.SetDestination(Player.transform.position);
+            // Aggiungi un offset casuale alla destinazione del giocatore
+            Vector3 randomOffset = new Vector3(
+                Random.Range(-DestinationOffset, DestinationOffset),
+                0,
+                Random.Range(-DestinationOffset, DestinationOffset)
+            );
+
+            Vector3 destination = Player.position + randomOffset;
+
+            Agent.SetDestination(destination);
+
             yield return Wait;
         }
     }
