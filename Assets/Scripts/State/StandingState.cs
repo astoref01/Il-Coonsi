@@ -24,8 +24,6 @@ public class StandingState : State
     {
         base.Enter();
 
-        Debug.Log("Entering Standing State");
-
         jump = false;
         crouch = false;
         sprint = false;
