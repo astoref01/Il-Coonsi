@@ -12,4 +12,5 @@ public interface IDamageable
     public event DeathEvent OnDeath;
 
     public void TakeDamage(int Damage);
+    Transform GetTransform();
 }

@@ -12,6 +12,8 @@ public class GunScriptableObject : ScriptableObject
     public GameObject ModelPrefab;
     public Vector3 SpawnPoint;
     public Vector3 SpawnRotation;
+    public int i = 0;
+
 
     public ShootConfigScriptableObject ShootConfig;
     public TrailConfigScriptableObject TrailConfig;
@@ -20,10 +22,20 @@ public class GunScriptableObject : ScriptableObject
 
     private MonoBehaviour ActiveMonoBehaviour;
     private GameObject Model;
-    
+
     private float LastShootTime;
     private ParticleSystem ShootSystem;
     private ObjectPool<TrailRenderer> TrailPool;
+
+    public Transform AimTarget { get; private set; } // Mantieni privato, con solo il getter pubblico
+    public Transform StoredAimTarget; // Memorizza l'AimTarget precedente
+    public Transform PlayerHead; // Testa del giocatore
+    public float maxAimAngle = 30f; // L'angolo massimo di mira assistita
+
+    public void Start()
+    {
+        i = 0;
+    }
 
     public void Spawn(Transform Parent, MonoBehaviour ActiveMonoBehaviour)
     {
@@ -38,6 +50,35 @@ public class GunScriptableObject : ScriptableObject
 
         ShootSystem = Model.GetComponentInChildren<ParticleSystem>();
         ShootingAudioSource = Model.GetComponent<AudioSource>();
+
+        // Inizializza AimTarget come null
+        AimTarget = null;
+    }
+
+    public void UpdateAimTarget()
+    {
+        if (StoredAimTarget != null)
+        {
+            Vector3 directionToTarget = (StoredAimTarget.position - PlayerHead.position).normalized;
+            float angle = Vector3.Angle(PlayerHead.forward, directionToTarget);
+
+            if (angle > maxAimAngle)
+            {
+                if (AimTarget != null)
+                {
+                    Debug.Log("AimTarget disattivato.");
+                }
+                AimTarget = null; // Disattiva l'aim assist se l'angolo è maggiore del massimo consentito
+            }
+            else
+            {
+                if (AimTarget == null)
+                {
+                    Debug.Log("AimTarget attivato.");
+                }
+                AimTarget = StoredAimTarget; // Riattiva l'aim assist se l'angolo è minore o uguale al massimo consentito
+            }
+        }
     }
 
     public void Shoot()
@@ -48,22 +89,32 @@ public class GunScriptableObject : ScriptableObject
             LastShootTime = Time.time;
             ShootSystem.Play();
             audioConfig.PlayShootingClip(ShootingAudioSource);
-            Vector3 shootDirection = ShootSystem.transform.forward
-                + new Vector3(
-                    Random.Range(
-                        -ShootConfig.Spread.x,
-                        ShootConfig.Spread.x
-                    ),
-                    Random.Range(
-                        -ShootConfig.Spread.y,
-                        ShootConfig.Spread.y
-                    ),
-                    Random.Range(
-                        -ShootConfig.Spread.z,
-                        ShootConfig.Spread.z
-                    )
-                );
-            shootDirection.Normalize();
+
+            Vector3 shootDirection;
+
+            if (AimTarget != null)
+            {
+                shootDirection = (AimTarget.position - ShootSystem.transform.position).normalized;
+            }
+            else
+            {
+                shootDirection = ShootSystem.transform.forward
+                    + new Vector3(
+                        Random.Range(
+                            -ShootConfig.Spread.x,
+                            ShootConfig.Spread.x
+                        ),
+                        Random.Range(
+                            -ShootConfig.Spread.y,
+                            ShootConfig.Spread.y
+                        ),
+                        Random.Range(
+                            -ShootConfig.Spread.z,
+                            ShootConfig.Spread.z
+                        )
+                    );
+                shootDirection.Normalize();
+            }
 
             if (Physics.Raycast(
                     ShootSystem.transform.position,
@@ -91,11 +142,15 @@ public class GunScriptableObject : ScriptableObject
                     )
                 );
             }
+            i = i + 1;
+
         }
+        
     }
 
     private IEnumerator PlayTrail(Vector3 StartPoint, Vector3 EndPoint, RaycastHit Hit)
     {
+        
         TrailRenderer instance = TrailPool.Get();
         instance.gameObject.SetActive(true);
         instance.transform.position = StartPoint;
@@ -133,7 +188,7 @@ public class GunScriptableObject : ScriptableObject
             {
                 damageable.TakeDamage(DamageConfig.GetDamage(distance));
             }
-            
+
         }
 
         yield return new WaitForSeconds(TrailConfig.Duration);
@@ -158,6 +213,7 @@ public class GunScriptableObject : ScriptableObject
 
         return trail;
     }
+
     public void ApplyDamage(Vector3 startPosition, Vector3 endPoint, int damage)
     {
         // Logica per applicare il danno direttamente
@@ -169,5 +225,4 @@ public class GunScriptableObject : ScriptableObject
             }
         }
     }
-
 }
