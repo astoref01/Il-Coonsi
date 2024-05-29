@@ -11,7 +11,7 @@
 //    Transform cameraTransform;
 //    InputAction interactAction;
 
-//    //For Gizmo
+//    // For Gizmo
 //    Vector3 origin;
 //    Vector3 direction;
 //    Vector3 hitPosition;
@@ -95,6 +95,8 @@
 //        interactAction.performed -= Interact;
 //    }
 //}
+
+
 using UnityEngine.InputSystem;
 using UnityEngine;
 using System;
@@ -102,6 +104,7 @@ using System;
 public class Interactor : MonoBehaviour
 {
     [SerializeField] float interactingRadius = 10f;
+    //[SerializeField] float maxInteractingDistance = 10;
 
     LayerMask layerMask;
     InputAction interactAction;
@@ -186,3 +189,5 @@ public class Interactor : MonoBehaviour
         interactAction.performed -= Interact;
     }
 }
+
+

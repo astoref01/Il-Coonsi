@@ -56,23 +56,23 @@ public class InventoryManager : MonoBehaviour
                 
     }
 
-    public void EnableItemRemove()
-    {
-        if (EnableRemove.isOn)
-        {
-            foreach (Transform item in ItemContent)
-            {
-                item.Find("RemoveButton").gameObject.SetActive(true);
-            }
-        }
-        else
-        {
-            foreach (Transform item in ItemContent)
-            {
-                item.Find("RemoveButton").gameObject.SetActive(false);
-            }
-        }
-    }
+    //public void EnableItemRemove()
+    //{
+    //    if (EnableRemove.isOn)
+    //    {
+    //        foreach (Transform item in ItemContent)
+    //        {
+    //            item.Find("RemoveButton").gameObject.SetActive(true);
+    //        }
+    //    }
+    //    else
+    //    {
+    //        foreach (Transform item in ItemContent)
+    //        {
+    //            item.Find("RemoveButton").gameObject.SetActive(false);
+    //        }
+    //    }
+    //}
 
     public void SetInventoryItems()
     {

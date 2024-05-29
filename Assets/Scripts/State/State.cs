@@ -17,6 +17,9 @@ public class State
     public InputAction sprintAction;
     //public InputAction drawWeaponAction;
     public InputAction attackAction;
+    public InputAction interactAction;
+
+
 
     public State(Character _character, StateMachine _stateMachine)
 	{
@@ -30,6 +33,7 @@ public class State
         sprintAction = character.playerInput.actions["Sprint"];
         //drawWeaponAction = character.playerInput.actions["DrawWeapon"];
         attackAction = character.playerInput.actions["Attack"];
+        interactAction = character.playerInput.actions["Interact"];
 
     }
 
