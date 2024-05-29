@@ -1390,6 +1390,9 @@ MonoBehaviour:
   Guns:
   - {fileID: 11400000, guid: 9aaa5aa367adc4fdd8c7c9ad4a078148, type: 2}
   InverseKinematics: {fileID: 533273807}
+  AITarget: {fileID: 1889645987}
+  PlayerHead: {fileID: 533273803}
+  maxAimAngle: 30
   ActiveGun: {fileID: 0}
 --- !u!114 &533273809
 MonoBehaviour:
@@ -2701,7 +2704,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612485157}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1882102, y: -0.022666702, z: 0.004344932, w: 0.9818576}
+  m_LocalRotation: {x: 0.1882102, y: -0.022666667, z: 0.004344925, w: 0.9818576}
   m_LocalPosition: {x: 0.46146426, y: 3.82, z: -9.9893465}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3000,7 +3003,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1832514075}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1882102, y: -0.022666702, z: 0.004344932, w: 0.9818576}
+  m_LocalRotation: {x: 0.1882102, y: -0.022666667, z: 0.004344925, w: 0.9818576}
   m_LocalPosition: {x: 0.46146426, y: 3.82, z: -9.9893465}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3517,6 +3520,9 @@ MonoBehaviour:
   Guns:
   - {fileID: 11400000, guid: c2cae378164784043a92ce9069af6eb6, type: 2}
   InverseKinematics: {fileID: 1889645993}
+  AITarget: {fileID: 0}
+  PlayerHead: {fileID: 0}
+  maxAimAngle: 60
   ActiveGun: {fileID: 0}
 --- !u!114 &1889645995
 MonoBehaviour:

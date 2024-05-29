@@ -13,6 +13,12 @@ public class PlayerGunSelector : MonoBehaviour
     private List<GunScriptableObject> Guns;
     [SerializeField]
     private PlayerIK InverseKinematics;
+    [SerializeField]
+    private Transform AITarget; // Aggiungi questo campo
+    [SerializeField]
+    private Transform PlayerHead; // Testa del giocatore
+    [SerializeField]
+    private float maxAimAngle = 30f; // L'angolo massimo di mira assistita
 
     [Space]
     [Header("Runtime Filled")]
@@ -31,11 +37,24 @@ public class PlayerGunSelector : MonoBehaviour
         ActiveGun = gun;
         gun.Spawn(GunParent, this);
 
+        // Memorizza il target dell'AI
+        ActiveGun.StoredAimTarget = AITarget;
+        ActiveGun.PlayerHead = PlayerHead;
+        ActiveGun.maxAimAngle = maxAimAngle;
+
         // some magic for IK
         Transform[] allChildren = GunParent.GetComponentsInChildren<Transform>();
         InverseKinematics.LeftElbowIKTarget = allChildren.FirstOrDefault(child => child.name == "LeftElbow");
         InverseKinematics.RightElbowIKTarget = allChildren.FirstOrDefault(child => child.name == "RightElbow");
         InverseKinematics.LeftHandIKTarget = allChildren.FirstOrDefault(child => child.name == "LeftHand");
         InverseKinematics.RightHandIKTarget = allChildren.FirstOrDefault(child => child.name == "RightHand");
+    }
+
+    private void Update()
+    {
+        if (ActiveGun != null)
+        {
+            ActiveGun.UpdateAimTarget(); // Aggiorna l'aim target ogni frame
+        }
     }
 }
