@@ -12,6 +12,8 @@ public class GunScriptableObject : ScriptableObject
     public GameObject ModelPrefab;
     public Vector3 SpawnPoint;
     public Vector3 SpawnRotation;
+    public int i = 0;
+
 
     public ShootConfigScriptableObject ShootConfig;
     public TrailConfigScriptableObject TrailConfig;
@@ -29,6 +31,11 @@ public class GunScriptableObject : ScriptableObject
     public Transform StoredAimTarget; // Memorizza l'AimTarget precedente
     public Transform PlayerHead; // Testa del giocatore
     public float maxAimAngle = 30f; // L'angolo massimo di mira assistita
+
+    public void Start()
+    {
+        i = 0;
+    }
 
     public void Spawn(Transform Parent, MonoBehaviour ActiveMonoBehaviour)
     {
@@ -76,6 +83,7 @@ public class GunScriptableObject : ScriptableObject
 
     public void Shoot()
     {
+        
         if (Time.time > ShootConfig.FireRate + LastShootTime)
         {
             LastShootTime = Time.time;
@@ -134,11 +142,15 @@ public class GunScriptableObject : ScriptableObject
                     )
                 );
             }
+            i = i + 1;
+
         }
+        
     }
 
     private IEnumerator PlayTrail(Vector3 StartPoint, Vector3 EndPoint, RaycastHit Hit)
     {
+        
         TrailRenderer instance = TrailPool.Get();
         instance.gameObject.SetActive(true);
         instance.transform.position = StartPoint;
