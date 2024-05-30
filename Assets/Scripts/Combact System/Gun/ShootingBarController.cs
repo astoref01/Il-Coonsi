@@ -7,7 +7,7 @@ public class ShootingBarController : MonoBehaviour
     private GunScriptableObject gunScriptableObject;
     public Slider shootingBar;
     public int maxShots = 100;
-    private int resetThreshold = 50;
+    public int resetThreshold = 3;
 
     void Start()
     {

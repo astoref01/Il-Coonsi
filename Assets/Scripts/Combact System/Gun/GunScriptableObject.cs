@@ -83,7 +83,7 @@ public class GunScriptableObject : ScriptableObject
 
     public void Shoot()
     {
-        
+
         if (Time.time > ShootConfig.FireRate + LastShootTime)
         {
             LastShootTime = Time.time;
@@ -142,15 +142,15 @@ public class GunScriptableObject : ScriptableObject
                     )
                 );
             }
-            i = i + 1;
+            
 
         }
-        
+
     }
 
     private IEnumerator PlayTrail(Vector3 StartPoint, Vector3 EndPoint, RaycastHit Hit)
     {
-        
+
         TrailRenderer instance = TrailPool.Get();
         instance.gameObject.SetActive(true);
         instance.transform.position = StartPoint;
@@ -187,6 +187,7 @@ public class GunScriptableObject : ScriptableObject
             if (Hit.collider.TryGetComponent(out IDamageable damageable))
             {
                 damageable.TakeDamage(DamageConfig.GetDamage(distance));
+                i = i + 1;
             }
 
         }
