@@ -37,7 +37,7 @@ public class Interactable : MonoBehaviour
 
 	protected virtual void Interaction()
 	{
-        print("interact with: " + this.name);
+        //print("interact with: " + this.name);
     }
 
 	private void OnDrawGizmos()
