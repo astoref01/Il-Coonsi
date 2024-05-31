@@ -1603,20 +1603,20 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  specialCAction:
-    m_Name: Special C
+  specialXAction:
+    m_Name: Special X
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: f620618f-33ba-4a2e-82da-003563973e02
+    m_Id: ce5fa862-bcaa-4afe-8b9b-37f5eea2c7e3
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
-  specialDAction:
-    m_Name: Special D
+  specialYAction:
+    m_Name: Special Y
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: b46d7143-0dc6-4b89-b413-bfb0fea2b4e5
+    m_Id: c64f35f3-198a-4bd1-b952-d362a252e809
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -1860,8 +1860,8 @@ MonoBehaviour:
   maxShots: 10
   resetThresholdA: 2
   resetThresholdB: 5
-  resetThresholdC: 7
-  resetThresholdD: 9
+  resetThresholdY: 3
+  resetThresholdX: 3
 --- !u!1 &543382341
 GameObject:
   m_ObjectHideFlags: 0
@@ -2888,8 +2888,8 @@ MonoBehaviour:
   maxShots: 10
   resetThresholdA: 3
   resetThresholdB: 3
-  resetThresholdC: 3
-  resetThresholdD: 3
+  resetThresholdY: 3
+  resetThresholdX: 3
 --- !u!1 &1138535064
 GameObject:
   m_ObjectHideFlags: 0

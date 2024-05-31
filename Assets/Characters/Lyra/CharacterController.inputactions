@@ -96,7 +96,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SpecialC",
+                    "name": "SpecialY",
                     "type": "Button",
                     "id": "b6c32e4b-b908-4089-915b-8970aae8c9fb",
                     "expectedControlType": "Button",
@@ -105,7 +105,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SpecialD",
+                    "name": "SpecialX",
                     "type": "Button",
                     "id": "c6cb88fa-4a07-42dc-acb6-a3af17a9e02a",
                     "expectedControlType": "Button",
@@ -386,7 +386,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpecialC",
+                    "action": "SpecialY",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -397,7 +397,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpecialC",
+                    "action": "SpecialY",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -408,7 +408,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpecialD",
+                    "action": "SpecialX",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -419,7 +419,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpecialD",
+                    "action": "SpecialX",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

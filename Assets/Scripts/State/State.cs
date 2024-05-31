@@ -19,8 +19,8 @@ public class State
     public InputAction attackAction;
     public InputAction specialAAction;
     public InputAction specialBAction;
-    public InputAction specialCAction;
-    public InputAction specialDAction;
+    public InputAction specialYAction;
+    public InputAction specialXAction;
 
     public State(Character _character, StateMachine _stateMachine)
 	{
@@ -36,8 +36,8 @@ public class State
         attackAction = character.playerInput.actions["Attack"];
         specialAAction = character.playerInput.actions["SpecialA"];
         specialBAction = character.playerInput.actions["SpecialB"];
-        specialCAction = character.playerInput.actions["SpecialC"];
-        specialDAction = character.playerInput.actions["SpecialD"];
+        specialYAction = character.playerInput.actions["SpecialY"];
+        specialXAction = character.playerInput.actions["SpecialX"];
 
     }
 

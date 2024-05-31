@@ -5,8 +5,8 @@ public class Character : MonoBehaviour
     [Header("Controls")]
     public InputAction specialAAction;
     public InputAction specialBAction;
-    public InputAction specialCAction;
-    public InputAction specialDAction;
+    public InputAction specialXAction;
+    public InputAction specialYAction;
     public float playerSpeed = 5.0f;
     public float crouchSpeed = 2.0f;
     public float sprintSpeed = 7.0f;
@@ -71,9 +71,9 @@ public class Character : MonoBehaviour
 
         movementSM.Initialize(standing);
         specialAAction = playerInput.actions["SpecialA"];
-        specialAAction = playerInput.actions["SpecialB"];
-        specialAAction = playerInput.actions["SpecialC"];
-        specialAAction = playerInput.actions["SpecialD"];
+        specialBAction = playerInput.actions["SpecialB"];
+        specialXAction = playerInput.actions["SpecialX"];
+        specialYAction = playerInput.actions["SpecialY"];
 
         normalColliderHeight = controller.height;
         gravityValue *= gravityMultiplier;

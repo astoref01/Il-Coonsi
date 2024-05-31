@@ -9,8 +9,8 @@ public class ShootingBarController : MonoBehaviour
     public int maxShots = 10;
     public int resetThresholdA = 3;
     public int resetThresholdB = 3;
-    public int resetThresholdC = 3;
-    public int resetThresholdD = 3;
+    public int resetThresholdY = 3;
+    public int resetThresholdX = 3;
 
     void Start()
     {
@@ -45,17 +45,17 @@ public class ShootingBarController : MonoBehaviour
             shootingBar.value = 0;
         }
     }
-    public void HandleSpecialC()
+    public void HandleSpecialY()
     {
-        if (shootingBar.value >= resetThresholdC)
+        if (shootingBar.value >= resetThresholdY)
         {
             gunScriptableObject.i = 0;
             shootingBar.value = 0;
         }
     }
-    public void HandleSpecialD()
+    public void HandleSpecialX()
     {
-        if (shootingBar.value >= resetThresholdD)
+        if (shootingBar.value >= resetThresholdX)
         {
             gunScriptableObject.i = 0;
             shootingBar.value = 0;
