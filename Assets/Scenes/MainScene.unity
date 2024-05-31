@@ -1409,7 +1409,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 0.00001
+  m_Height: 2
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
@@ -1585,11 +1585,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f0108f24786bf7418f835ff9fb40163, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  specialXAction:
-    m_Name: Special X
+  specialAAction:
+    m_Name: Special A
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 184330b5-e820-4965-ad94-1883b4018ece
+    m_Id: 4632471f-6972-4b5a-9fe6-32de27d5d452
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  specialBAction:
+    m_Name: Special B
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8108c5ac-682a-45b6-93a9-caca1e519ba0
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  specialCAction:
+    m_Name: Special C
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: f620618f-33ba-4a2e-82da-003563973e02
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  specialDAction:
+    m_Name: Special D
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b46d7143-0dc6-4b89-b413-bfb0fea2b4e5
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
@@ -1831,7 +1858,10 @@ MonoBehaviour:
   gunScriptableObject: {fileID: 11400000, guid: 9aaa5aa367adc4fdd8c7c9ad4a078148, type: 2}
   shootingBar: {fileID: 1130901690}
   maxShots: 10
-  resetThreshold: 3
+  resetThresholdA: 2
+  resetThresholdB: 5
+  resetThresholdC: 7
+  resetThresholdD: 9
 --- !u!1 &543382341
 GameObject:
   m_ObjectHideFlags: 0
@@ -2856,7 +2886,10 @@ MonoBehaviour:
   gunScriptableObject: {fileID: 11400000, guid: 9aaa5aa367adc4fdd8c7c9ad4a078148, type: 2}
   shootingBar: {fileID: 1130901690}
   maxShots: 10
-  resetThreshold: 3
+  resetThresholdA: 3
+  resetThresholdB: 3
+  resetThresholdC: 3
+  resetThresholdD: 3
 --- !u!1 &1138535064
 GameObject:
   m_ObjectHideFlags: 0

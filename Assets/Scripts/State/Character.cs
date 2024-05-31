@@ -3,7 +3,10 @@ using UnityEngine.InputSystem;
 public class Character : MonoBehaviour
 {
     [Header("Controls")]
-    public InputAction specialXAction;
+    public InputAction specialAAction;
+    public InputAction specialBAction;
+    public InputAction specialCAction;
+    public InputAction specialDAction;
     public float playerSpeed = 5.0f;
     public float crouchSpeed = 2.0f;
     public float sprintSpeed = 7.0f;
@@ -67,8 +70,11 @@ public class Character : MonoBehaviour
         attacking = new AttackState(this, movementSM);
 
         movementSM.Initialize(standing);
-        specialXAction = playerInput.actions["SpecialX"];
-    
+        specialAAction = playerInput.actions["SpecialA"];
+        specialAAction = playerInput.actions["SpecialB"];
+        specialAAction = playerInput.actions["SpecialC"];
+        specialAAction = playerInput.actions["SpecialD"];
+
         normalColliderHeight = controller.height;
         gravityValue *= gravityMultiplier;
     }
@@ -79,13 +85,7 @@ public class Character : MonoBehaviour
 
         movementSM.currentState.LogicUpdate();
     }
-    private void OnSpecialXPerformed(InputAction.CallbackContext context)
-    {
-        if (movementSM.currentState == combatting)
-        {
 
-        }
-    }
 
     private void FixedUpdate()
     {

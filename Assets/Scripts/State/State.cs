@@ -17,7 +17,10 @@ public class State
     public InputAction sprintAction;
     //public InputAction drawWeaponAction;
     public InputAction attackAction;
-    public InputAction specialXAction;
+    public InputAction specialAAction;
+    public InputAction specialBAction;
+    public InputAction specialCAction;
+    public InputAction specialDAction;
 
     public State(Character _character, StateMachine _stateMachine)
 	{
@@ -31,7 +34,10 @@ public class State
         sprintAction = character.playerInput.actions["Sprint"];
         //drawWeaponAction = character.playerInput.actions["DrawWeapon"];
         attackAction = character.playerInput.actions["Attack"];
-        specialXAction = character.playerInput.actions["SpecialX"];
+        specialAAction = character.playerInput.actions["SpecialA"];
+        specialBAction = character.playerInput.actions["SpecialB"];
+        specialCAction = character.playerInput.actions["SpecialC"];
+        specialDAction = character.playerInput.actions["SpecialD"];
 
     }
 

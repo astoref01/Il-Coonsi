@@ -78,9 +78,36 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SpecialX",
+                    "name": "SpecialA",
                     "type": "Button",
                     "id": "d6bbc035-b48f-401c-a14c-4960c3ada664",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SpecialB",
+                    "type": "Button",
+                    "id": "9d807708-1017-4b3e-9b7f-04e11c9bfcbe",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SpecialC",
+                    "type": "Button",
+                    "id": "b6c32e4b-b908-4089-915b-8970aae8c9fb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SpecialD",
+                    "type": "Button",
+                    "id": "c6cb88fa-4a07-42dc-acb6-a3af17a9e02a",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -315,7 +342,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpecialX",
+                    "action": "SpecialA",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -326,7 +353,73 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "SpecialX",
+                    "action": "SpecialA",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f3c9492a-483e-4b08-827c-5f94125ce55f",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpecialB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1fd9d24f-19fe-4a8b-8d17-a87f503766f5",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpecialB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e013f84c-a24e-4eeb-8eb7-f51cbe52118f",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpecialC",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7282de5d-4320-44ea-aebc-3d3649bf096e",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpecialC",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7d386ac4-c304-45ad-b2b5-13b5f09afe8c",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpecialD",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e62096d5-ac36-42cf-b17d-bf1206e8890f",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SpecialD",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
