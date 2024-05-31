@@ -8,7 +8,7 @@ public class CombatState : State
     //bool sheathWeapon;
     float playerSpeed;
     bool attack;
-
+    bool specialX;
     Vector3 cVelocity;
 
     public CombatState(Character _character, StateMachine _stateMachine) : base(_character, _stateMachine)
@@ -26,6 +26,7 @@ public class CombatState : State
         currentVelocity = Vector3.zero;
         gravityVelocity.y = 0;
         attack = false;
+        specialX = false;
 
         velocity = character.playerVelocity;
         playerSpeed = character.playerSpeed;
@@ -45,6 +46,10 @@ public class CombatState : State
         if (attackAction.triggered)
         {
             attack = true;
+        }
+        if (specialXAction.triggered)
+        {
+            specialX = true; // Impostazione della variabile quando l'azione è attivata
         }
 
         input = moveAction.ReadValue<Vector2>();
@@ -70,6 +75,14 @@ public class CombatState : State
         {
             character.animator.SetTrigger("attack");
             stateMachine.ChangeState(character.attacking);
+        }
+        if (specialX)
+        {
+            // Codice per gestire l'azione specialX
+            // Ad esempio, puoi chiamare una funzione nel controller ShootingBarController qui
+            character.GetComponent<ShootingBarController>().HandleSpecialX();
+
+            specialX = false; // Reimposta la variabile
         }
     }
 

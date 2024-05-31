@@ -6,7 +6,7 @@ public class ShootingBarController : MonoBehaviour
     [SerializeField]
     private GunScriptableObject gunScriptableObject;
     public Slider shootingBar;
-    public int maxShots = 100;
+    public int maxShots = 10;
     public int resetThreshold = 3;
 
     void Start()
@@ -20,10 +20,15 @@ public class ShootingBarController : MonoBehaviour
         UpdateShootingBar();
     }
 
-    private void UpdateShootingBar()
+
+    public void UpdateShootingBar()
     {
         shootingBar.value = gunScriptableObject.i;
-        if (shootingBar.value >= resetThreshold && Input.GetMouseButtonDown(1))
+    }
+
+    public void HandleSpecialX()
+    {
+        if (shootingBar.value >= resetThreshold)
         {
             gunScriptableObject.i = 0;
             shootingBar.value = 0;
