@@ -7,8 +7,8 @@ public class EnemyMovement : MonoBehaviour
 {
     public Transform Player;
     [SerializeField]
-    //private Animator Animator;
-    public float UpdateRate = 0.1f;
+    private Animator Animator;
+    public float UpdateRate = 2.5f;
     private NavMeshAgent Agent;
     public float StoppingDistance = 1.0f;
     private const string IsWalking = "IsWalking";
@@ -38,7 +38,7 @@ public class EnemyMovement : MonoBehaviour
 
     private void Update()
     {
-        //Animator.SetBool(IsWalking, Agent.velocity.magnitude > 0.01f);
+        Animator.SetBool(IsWalking, Agent.velocity.magnitude > 0.01f);
     }
 
 
