@@ -66,7 +66,6 @@ public class GunScriptableObject : ScriptableObject
             {
                 if (AimTarget != null)
                 {
-                    Debug.Log("AimTarget disattivato.");
                 }
                 AimTarget = null; // Disattiva l'aim assist se l'angolo è maggiore del massimo consentito
             }
@@ -74,7 +73,6 @@ public class GunScriptableObject : ScriptableObject
             {
                 if (AimTarget == null)
                 {
-                    Debug.Log("AimTarget attivato.");
                 }
                 AimTarget = StoredAimTarget; // Riattiva l'aim assist se l'angolo è minore o uguale al massimo consentito
             }
