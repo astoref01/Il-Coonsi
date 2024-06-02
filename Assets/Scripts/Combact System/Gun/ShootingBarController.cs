@@ -51,7 +51,7 @@ public class ShootingBarController : MonoBehaviour
 
     public void OnEndSpecialA()
     {
-        
+        character.animator.SetTrigger("EndSpecialA");
         cameraDisplayManager.DisableAllCameras();
         enemyHealth._Health = enemyHealth._Health - damageA;
     }
