@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class InventoryManager : MonoBehaviour
 {
-    
     public static InventoryManager Instance;
     public List<Item> Items = new List<Item>();
 
@@ -17,9 +16,37 @@ public class InventoryManager : MonoBehaviour
     public Toggle EnableRemove;
     public InventoryItemController[] InventoryItems;
 
+    public InputActionReference inventoryActionReference; // Riferimento all'azione Inventory
+    public GameObject inventoryUI; // Riferimento al GameObject dell'inventario
+    private bool isInventoryOpen = false;
+
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void OnEnable()
+    {
+        inventoryActionReference.action.performed += ToggleInventory;
+        inventoryActionReference.action.Enable();
+    }
+
+    private void OnDisable()
+    {
+        inventoryActionReference.action.performed -= ToggleInventory;
+        inventoryActionReference.action.Disable();
+    }
+
+    private void ToggleInventory(InputAction.CallbackContext context)
+    {
+        if (isInventoryOpen)
+        {
+            CloseInventory();
+        }
+        else
+        {
+            OpenInventory();
+        }
     }
 
     public void Add(Item item)
@@ -27,14 +54,14 @@ public class InventoryManager : MonoBehaviour
         Items.Add(item);
     }
 
-    public void Remove(Item item) 
-    { 
+    public void Remove(Item item)
+    {
         Items.Remove(item);
     }
 
-    public void ListItems()        
+    public void ListItems()
     {
-        foreach(Transform item in ItemContent) 
+        foreach (Transform item in ItemContent)
         {
             Destroy(item.gameObject);
         }
@@ -53,7 +80,7 @@ public class InventoryManager : MonoBehaviour
                 removeButton.gameObject.SetActive(true);
         }
         SetInventoryItems();
-                
+
     }
 
     public void EnableItemRemove()
@@ -81,5 +108,20 @@ public class InventoryManager : MonoBehaviour
         {
             InventoryItems[i].AddItem(Items[i]);
         }
+    }
+
+    private void OpenInventory()
+    {
+        // Codice per aprire l'inventario (es. abilitare UI dell'inventario)
+        inventoryUI.SetActive(true);
+        ListItems();
+        isInventoryOpen = true;
+    }
+
+    private void CloseInventory()
+    {
+        // Codice per chiudere l'inventario (es. disabilitare UI dell'inventario)
+        inventoryUI.SetActive(false);
+        isInventoryOpen = false;
     }
 }
