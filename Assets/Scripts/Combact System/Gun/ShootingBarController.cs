@@ -5,12 +5,19 @@ public class ShootingBarController : MonoBehaviour
 {
     [SerializeField]
     private GunScriptableObject gunScriptableObject;
+    public Character character;
     public Slider shootingBar;
+    public EnemyHealth enemyHealth;
     public int maxShots = 10;
     public int resetThresholdA = 3;
     public int resetThresholdB = 3;
     public int resetThresholdY = 3;
     public int resetThresholdX = 3;
+    public int damageA = 8;
+    public int damageB = 20;
+    public int damageY = 30;
+    public int damageX = 50;
+    
 
     public CameraDisplayManager cameraDisplayManager;
 
@@ -41,6 +48,14 @@ public class ShootingBarController : MonoBehaviour
             cameraDisplayManager.HandleSpecialA();
         }
     }
+
+    public void OnEndSpecialA()
+    {
+        
+        cameraDisplayManager.DisableAllCameras();
+        enemyHealth._Health = enemyHealth._Health - damageA;
+    }
+
 
     public void HandleSpecialB()
     {

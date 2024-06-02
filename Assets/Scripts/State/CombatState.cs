@@ -13,7 +13,7 @@ public class CombatState : State
     bool specialX;
     bool specialY;
     Vector3 cVelocity;
-
+    
     public CombatState(Character _character, StateMachine _stateMachine) : base(_character, _stateMachine)
     {
         character = _character;
@@ -98,8 +98,10 @@ public class CombatState : State
         {
            
             character.GetComponent<ShootingBarController>().HandleSpecialA();
-
+            character.animator.SetTrigger("SpecialA");
             specialA = false; // Reimposta la variabile
+            character.animator.SetTrigger("EndSpecialA");
+
         }
         if (specialB)
         {

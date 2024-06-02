@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour, IDamageable
 {
     [SerializeField]
-    private int _Health;
+    public int _Health;
     [SerializeField]
     private int _MaxHealth = 10;
     public int CurrentHealth { get => _Health; private set => _Health = value; }
@@ -24,8 +24,6 @@ public class EnemyHealth : MonoBehaviour, IDamageable
         int damageTaken = Mathf.Clamp(Damage, 0, CurrentHealth);
 
         CurrentHealth -= damageTaken;
-
-        Debug.Log(damageTaken);
         
         if (damageTaken != 0)
         {
