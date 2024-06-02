@@ -17,8 +17,12 @@ MonoBehaviour:
   Type: 2
   Name: Guitar
   ModelPrefab: {fileID: 1027854764920523238, guid: 3a4f3fbeb61014457a62785c20610d41, type: 3}
-  SpawnPoint: {x: -0.122741, y: 0.3351949, z: -0.258399}
-  SpawnRotation: {x: 1.998, y: -48.712, z: -90.113}
+  SpawnPoint: {x: 0.563, y: 0.223, z: 0.15}
+  SpawnRotation: {x: 0, y: -125, z: -90}
+  i: 16
   ShootConfig: {fileID: 11400000, guid: a5118c67d1f694cd5bf75e624b5b05c8, type: 2}
   TrailConfig: {fileID: 11400000, guid: 0a6d6d17edc3341d6898af411b081778, type: 2}
   audioConfig: {fileID: 11400000, guid: 26ca3b099eca84f1a9c40b0da1da0aea, type: 2}
+  StoredAimTarget: {fileID: 0}
+  PlayerHead: {fileID: 0}
+  maxAimAngle: 30
