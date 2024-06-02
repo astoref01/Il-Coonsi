@@ -6,7 +6,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
     [SerializeField]
     private int _Health;
     [SerializeField]
-    private int _MaxHealth = 100;
+    private int _MaxHealth = 10;
     public int CurrentHealth { get => _Health; private set => _Health = value; }
     public int MaxHealth { get => _MaxHealth; private set => _MaxHealth = value; }
 
