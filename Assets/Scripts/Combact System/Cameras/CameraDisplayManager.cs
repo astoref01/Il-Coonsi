@@ -8,13 +8,13 @@ public class CameraDisplayManager : MonoBehaviour
     public Camera cameraMoveY;
     public Camera cameraMoveX;
 
-    private void DisableAllCameras()
+    public void DisableAllCameras()
     {
         cameraMoveA.gameObject.SetActive(false);
         cameraMoveB.gameObject.SetActive(false);
         cameraMoveY.gameObject.SetActive(false);
         cameraMoveX.gameObject.SetActive(false);
-        Main.gameObject.SetActive(false);
+        Main.gameObject.SetActive(true);
     }
 
     public void HandleSpecialA()
@@ -23,6 +23,7 @@ public class CameraDisplayManager : MonoBehaviour
         cameraMoveA.gameObject.SetActive(true);
         
     }
+
 
     public void HandleSpecialB()
     {
