@@ -1587,8 +1587,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   specialAAction:
     m_Name: Special A
-    m_Type: 0
-    m_ExpectedControlType: 
+    m_Type: 1
+    m_ExpectedControlType: Button
     m_Id: 4632471f-6972-4b5a-9fe6-32de27d5d452
     m_Processors: 
     m_Interactions: 
@@ -1596,8 +1596,8 @@ MonoBehaviour:
     m_Flags: 0
   specialBAction:
     m_Name: Special B
-    m_Type: 0
-    m_ExpectedControlType: 
+    m_Type: 1
+    m_ExpectedControlType: Button
     m_Id: 8108c5ac-682a-45b6-93a9-caca1e519ba0
     m_Processors: 
     m_Interactions: 
@@ -1605,8 +1605,8 @@ MonoBehaviour:
     m_Flags: 0
   specialXAction:
     m_Name: Special X
-    m_Type: 0
-    m_ExpectedControlType: 
+    m_Type: 1
+    m_ExpectedControlType: Button
     m_Id: ce5fa862-bcaa-4afe-8b9b-37f5eea2c7e3
     m_Processors: 
     m_Interactions: 
@@ -1614,8 +1614,8 @@ MonoBehaviour:
     m_Flags: 0
   specialYAction:
     m_Name: Special Y
-    m_Type: 0
-    m_ExpectedControlType: 
+    m_Type: 1
+    m_ExpectedControlType: Button
     m_Id: c64f35f3-198a-4bd1-b952-d362a252e809
     m_Processors: 
     m_Interactions: 
@@ -1860,8 +1860,8 @@ MonoBehaviour:
   shootingBar: {fileID: 1130901690}
   enemyHealth: {fileID: 452080236}
   maxShots: 10
-  resetThresholdA: 2
-  resetThresholdB: 5
+  resetThresholdA: 3
+  resetThresholdB: 3
   resetThresholdY: 3
   resetThresholdX: 3
   damageA: 100
@@ -2085,7 +2085,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -933, y: -570}
+  m_AnchoredPosition: {x: -204, y: -67}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &780623134
@@ -2341,9 +2341,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: UICanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1085620511888297175, guid: b36bf4587d19eef44af21c7b43223d38, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2965948584871247021, guid: b36bf4587d19eef44af21c7b43223d38, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3545292860797878996, guid: b36bf4587d19eef44af21c7b43223d38, type: 3}
       propertyPath: questLogButtonPrefab
@@ -2428,6 +2432,10 @@ PrefabInstance:
     - target: {fileID: 4140918150426701518, guid: b36bf4587d19eef44af21c7b43223d38, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8885769877396485882, guid: b36bf4587d19eef44af21c7b43223d38, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2989,7 +2997,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -909, y: -628}
+  m_AnchoredPosition: {x: -183, y: -110}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1130901690
@@ -4355,7 +4363,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1612485157}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1882102, y: -0.022666667, z: 0.004344925, w: 0.9818576}
+  m_LocalRotation: {x: 0.1882102, y: -0.022666702, z: 0.004344932, w: 0.9818576}
   m_LocalPosition: {x: 0.46146426, y: 3.82, z: -9.9893465}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5241,7 +5249,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1832514075}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.1882102, y: -0.022666667, z: 0.004344925, w: 0.9818576}
+  m_LocalRotation: {x: 0.1882102, y: -0.022666702, z: 0.004344932, w: 0.9818576}
   m_LocalPosition: {x: 0.46146426, y: 3.82, z: -9.9893465}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

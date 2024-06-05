@@ -17,7 +17,7 @@ public class ShootingBarController : MonoBehaviour
     public int damageB = 20;
     public int damageY = 30;
     public int damageX = 50;
-    
+
 
     public CameraDisplayManager cameraDisplayManager;
 
@@ -45,6 +45,7 @@ public class ShootingBarController : MonoBehaviour
         {
             gunScriptableObject.i = 0;
             shootingBar.value = 0;
+            character.animator.SetTrigger("SpecialA");
             cameraDisplayManager.HandleSpecialA();
         }
     }
