@@ -1,0 +1,10 @@
+A, South, Cross; B, East, Circle
+X, West, Square
+A, South, Cross; X, West, Square
+B, East, Circle; X, West, Square
+A, South, Cross
+B, East, Circle
+A, South, Cross; Y, North, Triangle
+Y, North, Triangle
+B, East, Circle; Y, North, Triangle
+X, West, Square; Y, North, Triangle
