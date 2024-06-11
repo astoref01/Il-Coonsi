@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 using KeyCode = UnityEngine.InputSystem.Key;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.InputSystem.Controls;
@@ -29,88 +30,114 @@ public class QTEManager : MonoBehaviour
     }
 
     public QTEEventManager qteEventManager;
+    private bool isActive = false;
+    public GameObject timerGameObject;
+    private Timer timer;
+    public UnityEvent onFinalSuccess;
 
-    protected void Update()
+    void OnEnable()
     {
-        if (isFail) return;  // Non iniziare nuovi QTE se c'è stato un fallimento
+        isActive = true;
+    }
 
-        float currentRealTime = Time.realtimeSinceStartup;
-
-
-        if (!isEventStarted && eventData != null && currentRealTime >= eventData.startTime)
+    void OnDisable()
+    {
+        isActive = false;
+    }
+    void Start()
         {
-            StartEvent(eventData);
-        }
-
-        if (isEventStarted)
-        {
-            UpdateTimer();
-
-            if (keys.Count == 0 || isFail || currentRealTime >= eventData.endTime)
+            if (isActive)
             {
-                if (currentRealTime >= eventData.endTime)
+                timer = timerGameObject.GetComponent<Timer>();
+                if (qteEventManager == null)
                 {
-                    isFail = true;
+                    qteEventManager = FindObjectOfType<QTEEventManager>();
+                    
+                    if (qteEventManager == null)
+                    {
+                        Debug.LogError("QTEEventManager not found.");
+                        return;
+                    }
                 }
-                DoFinally();
             }
-            else
+        }
+            
+    void Update()
+    {
+        if (isActive)
+        {
+            if (isFail) 
             {
-                if (IsGamePadConnected())
+                return;
+            }
+
+            float currentRealTime = timer.ElapsedTime;
+
+            if (!isEventStarted && eventData != null && currentRealTime >= eventData.startTime)
+            {
+                StartEvent(eventData);
+            }
+
+            if (isEventStarted)
+            {
+                if (keys.Count == 0 || isFail || currentRealTime >= eventData.endTime)
                 {
-                    CheckGamepadInputs();
+                    if (currentRealTime >= eventData.endTime)
+                    {
+                        isFail = true;
+                    }
+                    DoFinally();
                 }
                 else
                 {
-                    CheckKeyboardInputs();
+                    if (IsGamePadConnected())
+                    {
+                        CheckGamepadInputs();
+                    }
+                    else
+                    {
+                        CheckKeyboardInputs();
+                    }
                 }
-            }
-        }
-    }
-
-    void Start()
-    {
-        if (qteEventManager == null)
-        {
-            qteEventManager = FindObjectOfType<QTEEventManager>();
-            if (qteEventManager == null)
-            {
-                Debug.LogError("QTEEventManager not found.");
-                return;
             }
         }
     }
 
     public void StartEvent(QTEEvent eventScriptable)
     {
-        Debug.Log("StartEvent() called with event: " + eventScriptable.name);
-
-        eventData = eventScriptable;
-        keys = new List<QTEKey>(eventData.keys);
-
-        eventData.onStart?.Invoke();
-
-        isAllButtonsPressed = false;
-        isEnded = false;
-        isFail = false;
-        isPaused = false;
-        rememberTimeScale = Time.timeScale;
-
-        switch (eventScriptable.timeType)
+        if (isActive)
         {
-            case QTETimeType.Slow:
-                Time.timeScale = slowMotionTimeScale;
-                break;
-            case QTETimeType.Paused:
-                Time.timeScale = 0;
-                break;
+            float currentRealTime = timer.ElapsedTime;
+            
+            Debug.Log("StartEvent() called with event: " + eventScriptable.name);
+
+            eventData = eventScriptable;
+            keys = new List<QTEKey>(eventData.keys);
+
+            eventData.onStart?.Invoke();
+
+            isAllButtonsPressed = false;
+            isEnded = false;
+            isFail = false;
+            isPaused = false;
+            rememberTimeScale = Time.timeScale;
+
+            switch (eventScriptable.timeType)
+            {
+                case QTETimeType.Slow:
+                    Time.timeScale = slowMotionTimeScale;
+                    break;
+                case QTETimeType.Paused:
+                    Time.timeScale = 0;
+                    break;
+            }
+
+            currentTime = eventData.time;
+            smoothTimeUpdate = currentRealTime;
+
+            SetupGUI();
+            isEventStarted = true;
         }
-
-        currentTime = eventData.time;
-        smoothTimeUpdate = currentTime;
-
-        SetupGUI();
-        isEventStarted = true;
     }
 
     private string GetInterval(float successTime, float startTime, float endTime)
@@ -142,52 +169,53 @@ public class QTEManager : MonoBehaviour
     }
 
     protected void DoFinally()
-{
-    if (keys.Count == 0)
     {
-        isAllButtonsPressed = true;
-    }
-    isEnded = true;
-    isEventStarted = false;
-    Time.timeScale = rememberTimeScale;
-    GetUI()?.eventUI.SetActive(false);
-    eventData?.onEnd.Invoke();
-
-    if (isFail)
-    {
-        eventData?.onFail.Invoke();
-        qteEventManager.StopAllEvents();  // Blocca tutti i QTE successivi in caso di fallimento
-    }
-    else if (isAllButtonsPressed)
-    {
-        float successTime = Time.realtimeSinceStartup; // Tempo di successo
-        Debug.Log("Success Time: " + successTime);
-        string interval = GetInterval(successTime, eventData.startTime, eventData.endTime);
-        Debug.Log("Interval: " + interval);
-        float score = GetScore(interval);
-        Debug.Log("Score: " + score);
-
-        totalMultiplier += score;
-        qteCount++;
-        Debug.Log("Total Multiplier: " + totalMultiplier);
-        Debug.Log("QTE Count: " + qteCount);
-
-        if (qteEventManager != null && qteEventManager.IsLastEvent(eventData))
+        if (isActive)
         {
-            eventData?.onSuccess.Invoke(); // Mostra la GUI di successo solo se è l'ultimo QTE
-
-            // Calcolo del moltiplicatore finale
-            if (qteCount > 0)
+            if (keys.Count == 0)
             {
-                float finalMultiplier = totalMultiplier / qteCount;
-                Debug.Log("Final Multiplier: " + finalMultiplier);
+                isAllButtonsPressed = true;
             }
+            isEnded = true;
+            isEventStarted = false;
+            Time.timeScale = rememberTimeScale;
+            GetUI()?.eventUI.SetActive(false);
+            eventData?.onEnd.Invoke();
+
+            if (isFail)
+            {
+                eventData?.onFail.Invoke();
+                qteEventManager.StopAllEvents();  // Blocca tutti i QTE successivi in caso di fallimento
+            }
+            else if (isAllButtonsPressed)
+            {
+                float successTime = timer.ElapsedTime; // Tempo di successo
+                Debug.Log("Success Time: " + successTime);
+                string interval = GetInterval(successTime, eventData.startTime, eventData.endTime);
+                Debug.Log("Interval: " + interval);
+                float score = GetScore(interval);
+                Debug.Log("Score: " + score);
+
+                totalMultiplier += score;
+                qteCount++;
+                Debug.Log("Total Multiplier: " + totalMultiplier);
+                Debug.Log("QTE Count: " + qteCount);
+
+                if (qteEventManager != null && qteEventManager.IsLastEvent(eventData))
+                {
+                    eventData?.onSuccess.Invoke(); // Mostra la GUI di successo solo se è l'ultimo QTE
+                    onFinalSuccess.Invoke();
+                    // Calcolo del moltiplicatore finale
+                    if (qteCount > 0)
+                    {
+                        float finalMultiplier = totalMultiplier / qteCount;
+                        Debug.Log("Final Multiplier: " + finalMultiplier);
+                    }
+                }
+            }
+            eventData = null;
         }
     }
-    eventData = null;
-}
-
-
 
     private void SetupGUI()
     {
@@ -385,16 +413,5 @@ public class QTEManager : MonoBehaviour
         isFail = true;
         Debug.Log("Wrong key pressed. Event failed.");
         DoFinally();
-    }
-
-    private void UpdateTimer()
-    {
-        currentTime -= Time.unscaledDeltaTime;
-        smoothTimeUpdate = Mathf.MoveTowards(smoothTimeUpdate, currentTime, Time.unscaledDeltaTime);
-        var ui = GetUI();
-        if (ui?.eventTimerText != null)
-        {
-            ui.eventTimerText.text = Mathf.CeilToInt(smoothTimeUpdate).ToString();
-        }
     }
 }

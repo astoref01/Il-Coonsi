@@ -17,6 +17,7 @@ public class ShootingBarController : MonoBehaviour
     public int damageB = 20;
     public int damageY = 30;
     public int damageX = 50;
+    public GameObject specialMoveA;
 
 
     public CameraDisplayManager cameraDisplayManager;
@@ -47,12 +48,13 @@ public class ShootingBarController : MonoBehaviour
             shootingBar.value = 0;
             character.animator.SetTrigger("SpecialA");
             cameraDisplayManager.HandleSpecialA();
+            specialMoveA.SetActive(true);
+            FindObjectOfType<QTEManager>().onFinalSuccess.AddListener(OnEndSpecialA);
         }
     }
 
     public void OnEndSpecialA()
     {
-        
         cameraDisplayManager.DisableAllCameras();
         enemyHealth._Health = enemyHealth._Health - damageA;
     }

@@ -21,12 +21,28 @@ public class QTEEventManager : MonoBehaviour
     public List<QTEEventTime> eventTimes = new List<QTEEventTime>();
 
     private bool hasFailed = false;
-    private float appStartTime;
+    private bool isActive = false;
+    public GameObject timerGameObject;
+    private Timer timer;
 
+    void OnEnable()
+    {
+        isActive = true;
+    }
+
+    void OnDisable()
+    {
+        isActive = false;
+    }
+
+    
     void Start()
     {
-        appStartTime = Time.realtimeSinceStartup; // Cattura il tempo di avvio dell'applicazione
-        LoadQTEEvents();
+        if (isActive)
+        {
+            timer = timerGameObject.GetComponent<Timer>();
+            LoadQTEEvents();
+        }
     }
 
     void LoadQTEEvents()
@@ -93,7 +109,6 @@ public class QTEEventManager : MonoBehaviour
                     qteEvent.keys.Add(qteKey);
                 }
 
-                // Utilizza appStartTime per calcolare i tempi
                 qteEvent.startTime = eventTimes[i].startTime;
                 qteEvent.endTime = eventTimes[i].endTime;
 
@@ -113,40 +128,45 @@ public class QTEEventManager : MonoBehaviour
 
     void Update()
     {
-        if (hasFailed) return;
+        if (isActive)
+        {  
+            if (hasFailed) return;
 
-        float currentTime = Time.realtimeSinceStartup;
+            float currentTime = timer.ElapsedTime;
 
-        foreach (var qteEvent in qteEvents)
-        {
-            if (currentTime >= qteEvent.startTime && currentTime < qteEvent.endTime)
+            foreach (var qteEvent in qteEvents)
             {
-                Debug.Log("QTE Active");
-                StartEvent(qteEvent);
-                qteEvents.Remove(qteEvent);
-                break;
-            }
-            else if (currentTime >= qteEvent.endTime && !qteEvent.hasEnded)
-            {
-                Debug.Log("QTE Failed");
-                qteEvent.hasEnded = true;
-                qteEvent.onFail.Invoke();
-                hasFailed = true;
-                break;
+                if (currentTime >= qteEvent.startTime && currentTime < qteEvent.endTime)
+                {
+                    Debug.Log("QTE Active");
+                    StartEvent(qteEvent);
+                    qteEvents.Remove(qteEvent);
+                    break;
+                }
+                else if (currentTime >= qteEvent.endTime && !qteEvent.hasEnded)
+                {
+                    Debug.Log("QTE Failed");
+                    qteEvent.hasEnded = true;
+                    qteEvent.onFail.Invoke();
+                    hasFailed = true;
+                    break;
+                }
             }
         }
     }
-
     private void StartEvent(QTEEvent qteEvent)
     {
-        QTEManager qteManager = FindObjectOfType<QTEManager>();
-        if (qteManager != null)
+        if (isActive)
         {
-            qteManager.StartEvent(qteEvent);
-        }
-        else
-        {
-            Debug.LogError("QTEManager not found.");
+            QTEManager qteManager = FindObjectOfType<QTEManager>();
+            if (qteManager != null)
+            {
+                qteManager.StartEvent(qteEvent);
+            }
+            else
+            {
+                Debug.LogError("QTEManager not found.");
+            }
         }
     }
 
