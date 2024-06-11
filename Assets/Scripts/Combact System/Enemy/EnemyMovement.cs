@@ -2,76 +2,60 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-[DisallowMultipleComponent]
 [RequireComponent(typeof(NavMeshAgent))]
 public class EnemyMovement : MonoBehaviour
 {
-    private Animator Animator;
+    public Transform Player;
     [SerializeField]
-    private float StillDelay = 1f;
-    private LookAtIK LookAt;
+    private Animator Animator;
+    public float UpdateRate = 2.5f;
     private NavMeshAgent Agent;
-
+    public float StoppingDistance = 1.0f;
     private const string IsWalking = "IsWalking";
-
-    private static NavMeshTriangulation Triangulation;
+    private const string Jump = "Jump";
+    private const string Landed = "Landed";
 
     private void Awake()
     {
-        Animator = GetComponent<Animator>();
         Agent = GetComponent<NavMeshAgent>();
-        LookAt = GetComponent<LookAtIK>();
-        if (Triangulation.vertices == null || Triangulation.vertices.Length == 0)
-        {
-            Triangulation = NavMesh.CalculateTriangulation();
-        }
+        Agent.stoppingDistance = StoppingDistance;
     }
 
     private void Start()
     {
-        StartCoroutine(Roam());
+        StartCoroutine(FollowTarget());
+    }
+
+    private void HandleLinkStart()
+    {
+        //Animator.SetTrigger(Jump);
+    }
+
+    private void HandleLinkEnd()
+    {
+        //Animator.SetTrigger(Landed);
     }
 
     private void Update()
     {
         Animator.SetBool(IsWalking, Agent.velocity.magnitude > 0.01f);
-        if (LookAt != null)
-        {
-            LookAt.lookAtTargetPosition = Agent.steeringTarget + transform.forward;
-        }
     }
 
-    private IEnumerator Roam()
-    {
-        WaitForSeconds wait = new WaitForSeconds(StillDelay);
 
-        while (enabled)
+    private IEnumerator FollowTarget()
+    {
+        WaitForSeconds Wait = new WaitForSeconds(UpdateRate);
+
+        while (gameObject.activeSelf)
         {
-            if (Triangulation.vertices.Length > 1)
-            {
-                int index = Random.Range(0, Triangulation.vertices.Length - 1);
-                Agent.SetDestination(
-                    Vector3.Lerp(
-                        Triangulation.vertices[index],
-                        Triangulation.vertices[index + 1],
-                        Random.value
-                    )
-                );
-                yield return new WaitUntil(() => Agent.remainingDistance <= Agent.stoppingDistance);
-                yield return wait;
-            }
-            else
-            {
-                Debug.LogWarning("Not enough vertices in NavMesh triangulation for roaming.");
-                yield return null;
-            }
-        }
-    }
+            Vector3 directionToPlayer = Player.position - transform.position;
+            Vector3 targetPosition = Player.position - directionToPlayer.normalized * StoppingDistance;
 
-    public void StopMoving()
-    {
-        StopAllCoroutines();
-        Agent.isStopped = true;
-        Agent.enabled = false;
+            if (directionToPlayer.magnitude > StoppingDistance)
+            {
+                Agent.SetDestination(targetPosition);
+            }
+            yield return Wait;
+        }
     }
 }

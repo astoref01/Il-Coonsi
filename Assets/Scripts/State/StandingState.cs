@@ -10,7 +10,7 @@ public class StandingState : State
     bool grounded;
     bool sprint;
     float playerSpeed;
-    bool drawWeapon;
+    //bool drawWeapon;
 
     Vector3 cVelocity;
 
@@ -27,7 +27,7 @@ public class StandingState : State
         jump = false;
         crouch = false;
         sprint = false;
-        drawWeapon = false;
+        //drawWeapon = false;
         input = Vector2.zero;
 
         currentVelocity = Vector3.zero;
@@ -56,10 +56,10 @@ public class StandingState : State
             sprint = true;
         }
 
-        if (drawWeaponAction.triggered)
-        {
-            drawWeapon = true;
-        }
+        //if (drawWeaponAction.triggered)
+        //{
+        //    drawWeapon = true;
+        //}
 
         input = moveAction.ReadValue<Vector2>();
         velocity = new Vector3(input.x, 0, input.y);
@@ -87,11 +87,11 @@ public class StandingState : State
             Debug.Log("Changing State to Crouching");
             stateMachine.ChangeState(character.crouching);
         }
-        if (drawWeapon)
-        {
-            stateMachine.ChangeState(character.combatting);
-            character.animator.SetTrigger("drawWeapon");
-        }
+        //if (drawWeapon)
+        //{
+        //    stateMachine.ChangeState(character.combatting);
+        //    character.animator.SetTrigger("drawWeapon");
+        //}
     }
 
     public override void PhysicsUpdate()

@@ -4,7 +4,6 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public EnemyHealth Health;
-    //public EnemyMovement Movement;
     public EnemyPainResponse PainResponse;
 
     private void Start()
@@ -15,7 +14,6 @@ public class Enemy : MonoBehaviour
 
     private void Die(Vector3 Position)
     {
-        //Movement.StopMoving();
         PainResponse.HandleDeath();
     }
 }

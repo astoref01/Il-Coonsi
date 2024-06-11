@@ -5,10 +5,13 @@ public class CombatState : State
     float gravityValue;
     Vector3 currentVelocity;
     bool grounded;
-    bool sheathWeapon;
+    //bool sheathWeapon;
     float playerSpeed;
-    bool attack;
-
+    //bool attack;
+    bool specialA;
+    bool specialB;
+    bool specialX;
+    bool specialY;
     Vector3 cVelocity;
 
     public CombatState(Character _character, StateMachine _stateMachine) : base(_character, _stateMachine)
@@ -21,11 +24,15 @@ public class CombatState : State
     {
         base.Enter();
 
-        sheathWeapon = false;
+        //sheathWeapon = false;
         input = Vector2.zero;
         currentVelocity = Vector3.zero;
         gravityVelocity.y = 0;
-        attack = false;
+        //attack = false;
+        specialA = false;
+        specialB = false;
+        specialX = false;
+        specialY = false;
 
         velocity = character.playerVelocity;
         playerSpeed = character.playerSpeed;
@@ -37,14 +44,30 @@ public class CombatState : State
     {
         base.HandleInput();
 
-        if (drawWeaponAction.triggered)
-        {
-            sheathWeapon = true;
-        }
+        //if (drawWeaponAction.triggered)
+        //{
+        //    sheathWeapon = true;
+        //}
 
-        if (attackAction.triggered)
+        //if (attackAction.triggered)
+        //{
+        //    attack = true;
+        //}
+        if (specialAAction.triggered)
         {
-            attack = true;
+            specialA = true; // Impostazione della variabile quando l'azione è attivata
+        }
+        if (specialBAction.triggered)
+        {
+            specialB = true; // Impostazione della variabile quando l'azione è attivata
+        }
+        if (specialYAction.triggered)
+        {
+            specialY = true; // Impostazione della variabile quando l'azione è attivata
+        }
+        if (specialXAction.triggered)
+        {
+            specialX = true; // Impostazione della variabile quando l'azione è attivata
         }
 
         input = moveAction.ReadValue<Vector2>();
@@ -60,16 +83,46 @@ public class CombatState : State
 
         character.animator.SetFloat("speed", input.magnitude, character.speedDampTime, Time.deltaTime);
 
-        if (sheathWeapon)
-        {
-            character.animator.SetTrigger("sheathWeapon");
-            stateMachine.ChangeState(character.standing);
-        }
+        //if (sheathWeapon)
+        //{
+        //    character.animator.SetTrigger("sheathWeapon");
+        //    stateMachine.ChangeState(character.standing);
+        //}
 
-        if (attack)
+        //if (attack)
+        //{
+        //    character.animator.SetTrigger("attack");
+        //    stateMachine.ChangeState(character.attacking);
+        //}
+        if (specialA)
         {
-            character.animator.SetTrigger("attack");
-            stateMachine.ChangeState(character.attacking);
+
+            character.GetComponent<ShootingBarController>().HandleSpecialA();
+            
+            specialA = false; // Reimposta la variabile
+
+
+        }
+        if (specialB)
+        {
+
+            character.GetComponent<ShootingBarController>().HandleSpecialB();
+
+            specialB = false; // Reimposta la variabile
+        }
+        if (specialY)
+        {
+
+            character.GetComponent<ShootingBarController>().HandleSpecialY();
+
+            specialY = false; // Reimposta la variabile
+        }
+        if (specialX)
+        {
+
+            character.GetComponent<ShootingBarController>().HandleSpecialX();
+
+            specialX = false; // Reimposta la variabile
         }
     }
 

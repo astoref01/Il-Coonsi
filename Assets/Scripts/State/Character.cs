@@ -3,10 +3,14 @@ using UnityEngine.InputSystem;
 public class Character : MonoBehaviour
 {
     [Header("Controls")]
+    public InputAction specialAAction;
+    public InputAction specialBAction;
+    public InputAction specialXAction;
+    public InputAction specialYAction;
     public float playerSpeed = 5.0f;
     public float crouchSpeed = 2.0f;
     public float sprintSpeed = 7.0f;
-    public float jumpHeight = 0.8f; 
+    public float jumpHeight = 0.8f;
     public float gravityMultiplier = 2;
     public float rotationSpeed = 5f;
     public float crouchColliderHeight = 1.35f;
@@ -66,6 +70,10 @@ public class Character : MonoBehaviour
         attacking = new AttackState(this, movementSM);
 
         movementSM.Initialize(standing);
+        specialAAction = playerInput.actions["SpecialA"];
+        specialBAction = playerInput.actions["SpecialB"];
+        specialXAction = playerInput.actions["SpecialX"];
+        specialYAction = playerInput.actions["SpecialY"];
 
         normalColliderHeight = controller.height;
         gravityValue *= gravityMultiplier;
@@ -78,8 +86,27 @@ public class Character : MonoBehaviour
         movementSM.currentState.LogicUpdate();
     }
 
+
     private void FixedUpdate()
     {
         movementSM.currentState.PhysicsUpdate();
+    }
+
+    public void EnterCombat()
+    {
+        if (movementSM.currentState != combatting)
+        {
+            movementSM.ChangeState(combatting);
+            animator.SetTrigger("drawWeapon");
+        }
+    }
+
+    public void ExitCombat()
+    {
+        if (movementSM.currentState == combatting)
+        {
+            movementSM.ChangeState(standing);
+            animator.SetTrigger("sheatWeapon");
+        }
     }
 }

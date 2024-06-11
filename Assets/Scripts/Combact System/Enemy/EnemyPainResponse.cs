@@ -24,15 +24,15 @@ public class EnemyPainResponse : MonoBehaviour
             // amount of damage taken relative to max health
             // here we're simply setting the additive layer
             // weight based on damage vs max pain threshhold
-            Animator.ResetTrigger("Hit");
-            Animator.SetLayerWeight(1, (float)Damage / MaxDamagePainThreshold);
-            Animator.SetTrigger("Hit");
+            //Animator.ResetTrigger("Hit");
+            //Animator.SetLayerWeight(1, (float)Damage / MaxDamagePainThreshold);
+            //Animator.SetTrigger("Hit");
         }
     }
 
     public void HandleDeath()
     {
-        Animator.applyRootMotion = true;
-        Animator.SetTrigger("Die"); 
+        //Animator.applyRootMotion = true;
+        //Animator.SetTrigger("Die"); 
     }
 }
