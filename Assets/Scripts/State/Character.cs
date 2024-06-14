@@ -82,7 +82,6 @@ public class Character : MonoBehaviour
     private void Update()
     {
         movementSM.currentState.HandleInput();
-
         movementSM.currentState.LogicUpdate();
     }
 
@@ -98,6 +97,7 @@ public class Character : MonoBehaviour
         {
             movementSM.ChangeState(combatting);
             animator.SetTrigger("drawWeapon");
+            GameObject.Find("InventoryManager")?.SetActive(false);
         }
     }
 
@@ -107,6 +107,35 @@ public class Character : MonoBehaviour
         {
             movementSM.ChangeState(standing);
             animator.SetTrigger("sheatWeapon");
+            GameObject.Find("InventoryManager")?.SetActive(true);
         }
+    }
+
+    public bool IsCombatting()
+    {
+        return movementSM.currentState == combatting;
+    }
+
+    public void EnterAttack()
+    {
+        if (movementSM.currentState != attacking)
+        {
+            movementSM.ChangeState(attacking);
+            GameObject.Find("InventoryManager")?.SetActive(false);
+        }
+    }
+
+    public void ExitAttack()
+    {
+        if (movementSM.currentState == attacking)
+        {
+            movementSM.ChangeState(combatting);
+            GameObject.Find("InventoryManager")?.SetActive(true);
+        }
+    }
+
+    public bool IsAttacking()
+    {
+        return movementSM.currentState == attacking;
     }
 }
