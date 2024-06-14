@@ -44,30 +44,21 @@ public class CombatState : State
     {
         base.HandleInput();
 
-        //if (drawWeaponAction.triggered)
-        //{
-        //    sheathWeapon = true;
-        //}
-
-        //if (attackAction.triggered)
-        //{
-        //    attack = true;
-        //}
         if (specialAAction.triggered)
         {
-            specialA = true; // Impostazione della variabile quando l'azione è attivata
+            specialA = true;
         }
         if (specialBAction.triggered)
         {
-            specialB = true; // Impostazione della variabile quando l'azione è attivata
+            specialB = true;
         }
         if (specialYAction.triggered)
         {
-            specialY = true; // Impostazione della variabile quando l'azione è attivata
+            specialY = true;
         }
         if (specialXAction.triggered)
         {
-            specialX = true; // Impostazione della variabile quando l'azione è attivata
+            specialX = true;
         }
 
         input = moveAction.ReadValue<Vector2>();
@@ -83,46 +74,36 @@ public class CombatState : State
 
         character.animator.SetFloat("speed", input.magnitude, character.speedDampTime, Time.deltaTime);
 
-        //if (sheathWeapon)
-        //{
-        //    character.animator.SetTrigger("sheathWeapon");
-        //    stateMachine.ChangeState(character.standing);
-        //}
-
-        //if (attack)
-        //{
-        //    character.animator.SetTrigger("attack");
-        //    stateMachine.ChangeState(character.attacking);
-        //}
         if (specialA)
         {
 
             character.GetComponent<ShootingBarController>().HandleSpecialA();
             
-            specialA = false; // Reimposta la variabile
-
-
+            specialA = false;
         }
+
         if (specialB)
         {
 
             character.GetComponent<ShootingBarController>().HandleSpecialB();
 
-            specialB = false; // Reimposta la variabile
+            specialB = false;
         }
+
         if (specialY)
         {
 
             character.GetComponent<ShootingBarController>().HandleSpecialY();
 
-            specialY = false; // Reimposta la variabile
+            specialY = false;
         }
+
         if (specialX)
         {
 
             character.GetComponent<ShootingBarController>().HandleSpecialX();
 
-            specialX = false; // Reimposta la variabile
+            specialX = false;
         }
     }
 
