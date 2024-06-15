@@ -14,7 +14,6 @@ public class DialogueManager : MonoBehaviour
     public AudioSource audioSource; // Aggiunto campo per l'audio
     public AudioClip[] dialogueAudioClips;
 
-
     void Start()
     {
         Debug.Log(dialogueAudioClips);
@@ -32,15 +31,14 @@ public class DialogueManager : MonoBehaviour
     {
         if (dialogueCanvas.gameObject.activeSelf && (currentPhraseIndex < dialoguePhrases.Length))
         {
-
             if (!isTyping)
             {
-                StartCoroutine(TypePhrase(dialoguePhrases[currentPhraseIndex]));
                 if (currentPhraseIndex < dialogueAudioClips.Length && dialogueAudioClips[currentPhraseIndex] != null)
                 {
                     audioSource.clip = dialogueAudioClips[currentPhraseIndex];
                     audioSource.Play();
                 }
+                StartCoroutine(TypePhrase(dialoguePhrases[currentPhraseIndex]));
             }
         }
         else
@@ -49,10 +47,8 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-
     private IEnumerator TypePhrase(string phrase)
     {
-        currentPhraseIndex++; // Sposta l'incremento dell'indice qui
         isTyping = true;
         dialogueText.text = "";
         foreach (char letter in phrase.ToCharArray())
@@ -61,13 +57,12 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSeconds(typingSpeed);
         }
         isTyping = false;
+        currentPhraseIndex++; // Sposta l'incremento dell'indice qui
     }
 
     public void EndDialogue()
     {
-        Debug.Log("dovrebbe terminare");
         dialogueCanvas.gameObject.SetActive(false);
         end = true;
- 
     }
 }
