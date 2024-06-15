@@ -5,9 +5,7 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-	[Header("Interaction Data")]
 	public string interactableName="";
-	public float interactionDistance = 2;
 	[SerializeField] bool isInteractable = true;
 
 	InteractableNameText interactableNameText;
@@ -40,11 +38,9 @@ public class Interactable : MonoBehaviour
         //print("interact with: " + this.name);
     }
 
-	private void OnDrawGizmos()
-	{
-		Gizmos.color = Color.blue;
-		Gizmos.DrawWireSphere(transform.position,interactionDistance);
-	}
+	
+
+
 	private void OnDestroy()
 	{
 		TargetOff();

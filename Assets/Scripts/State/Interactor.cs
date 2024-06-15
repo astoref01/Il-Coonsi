@@ -85,8 +85,15 @@ public class Interactor : MonoBehaviour
                 npcTarget = null;
             }
         }
-        
+
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, interactingRadius);
+    }
+
 
     private void Interact(InputAction.CallbackContext obj)
     {
@@ -111,11 +118,6 @@ public class Interactor : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, interactingRadius);
-    }
 
     private void OnDestroy()
     {
