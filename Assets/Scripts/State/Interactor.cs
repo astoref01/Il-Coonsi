@@ -8,22 +8,30 @@ public class Interactor : MonoBehaviour
 
     LayerMask layerMask;
     InputAction interactAction;
+    InputAction dialogueAction;
 
     [HideInInspector] public Interactable interactableTarget;
-    [HideInInspector] public Transform enemyTarget;
+    [HideInInspector] public Transform npcTarget;
 
     Character character;
     InteractableNameText interactableNameText;
+    DialogueManager dialogueManager;
 
     void Start()
     {
         character = GetComponent<Character>();
         interactableNameText = FindObjectOfType<InteractableNameText>(); // Trova il componente InteractableNameText nella scena
         layerMask = LayerMask.GetMask("Interactable", "Enemy", "NPC");
+<<<<<<< HEAD
 
 
+=======
+        dialogueManager = FindObjectOfType<DialogueManager>(); // Trova il componente DialogManager nella scena
+>>>>>>> origin/main
         interactAction = GetComponent<PlayerInput>().actions["Interact"];
+        dialogueAction = GetComponent<PlayerInput>().actions["Dialogue"];
         interactAction.performed += Interact;
+        dialogueAction.performed += ContinueDialogue;
     }
 
     void Update()
@@ -39,7 +47,6 @@ public class Interactor : MonoBehaviour
             {
                 if (!character.IsCombatting() && !character.IsAttacking())
                 {
-                    enemyTarget = hitCollider.transform;
                     character.EnterCombat();
                     enemyFound = true;
                 }
@@ -51,21 +58,47 @@ public class Interactor : MonoBehaviour
                 interactableNameText.SetInteractableNamePosition(interactableTarget); // Imposta la posizione del testo
                 interactableFound = true;
             }
+            else if (hitCollider.CompareTag("NPC") && !dialogueManager.end)
+            {
+                npcTarget = hitCollider.transform;
+                if (!dialogueManager.dialogueCanvas.gameObject.activeSelf)
+                {
+                    dialogueManager.StartDialogue();
+                }
+                interactableFound = true;
+            }
         }
 
-        if (!enemyFound && enemyTarget)
+        if (!enemyFound)
         {
-            enemyTarget = null;
             character.ExitCombat();
         }
 
-        if (!interactableFound && interactableTarget)
+        if (!interactableFound)
         {
-            interactableTarget.TargetOff();
-            interactableNameText.HideText(); // Nascondi il testo dell'interagibile
-            interactableTarget = null;
+            if (interactableTarget)
+            {
+                interactableTarget.TargetOff();
+                interactableNameText.HideText(); // Nascondi il testo dell'interagibile
+                interactableTarget = null;
+            }
+
+            if (npcTarget)
+            {
+                dialogueManager.EndDialogue();
+                dialogueManager.end = false;
+                npcTarget = null;
+            }
         }
+
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, interactingRadius);
+    }
+
 
     private void Interact(InputAction.CallbackContext obj)
     {
@@ -82,11 +115,14 @@ public class Interactor : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    private void ContinueDialogue(InputAction.CallbackContext obj)
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, interactingRadius);
+        if (npcTarget != null && dialogueManager.dialogueCanvas.gameObject.activeSelf)
+        {
+            dialogueManager.ShowNextPhrase();
+        }
     }
+
 
     private void OnDestroy()
     {

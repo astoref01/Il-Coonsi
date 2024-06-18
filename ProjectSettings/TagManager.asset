@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Canvas
   - Enemy
+  - CinemachineTarget
+  - NPC
   layers:
   - Default
   - TransparentFX
