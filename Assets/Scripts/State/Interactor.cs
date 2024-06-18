@@ -21,6 +21,7 @@ public class Interactor : MonoBehaviour
         interactableNameText = FindObjectOfType<InteractableNameText>(); // Trova il componente InteractableNameText nella scena
         layerMask = LayerMask.GetMask("Interactable", "Enemy", "NPC");
 
+
         interactAction = GetComponent<PlayerInput>().actions["Interact"];
         interactAction.performed += Interact;
     }

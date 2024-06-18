@@ -13,6 +13,7 @@ public class CombatState : State
     bool specialX;
     bool specialY;
     Vector3 cVelocity;
+    public static event System.Action OnCombatStateEnter;
 
     public CombatState(Character _character, StateMachine _stateMachine) : base(_character, _stateMachine)
     {
@@ -38,6 +39,9 @@ public class CombatState : State
         playerSpeed = character.playerSpeed;
         grounded = character.controller.isGrounded;
         gravityValue = character.gravityValue;
+
+        // Lancia l'evento per attivare la GUI
+        OnCombatStateEnter?.Invoke();
     }
 
     public override void HandleInput()
