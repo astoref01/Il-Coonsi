@@ -11,6 +11,7 @@ public class EnemyPainResponse : MonoBehaviour
     [Range(1, 100)]
     private int MaxDamagePainThreshold = 5;
 
+
     private void Awake()
     {
         Animator = GetComponent<Animator>();
