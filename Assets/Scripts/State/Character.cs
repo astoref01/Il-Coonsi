@@ -98,6 +98,7 @@ public class Character : MonoBehaviour
             movementSM.ChangeState(combatting);
             animator.SetTrigger("drawWeapon");
             GameObject.Find("InventoryManager")?.SetActive(false);
+            GameObject.Find("Inventory")?.SetActive(false);
         }
     }
 
@@ -108,6 +109,7 @@ public class Character : MonoBehaviour
             movementSM.ChangeState(standing);
             animator.SetTrigger("sheatWeapon");
             GameObject.Find("InventoryManager")?.SetActive(true);
+            GameObject.Find("Inventory")?.SetActive(true);
         }
     }
 
@@ -121,7 +123,6 @@ public class Character : MonoBehaviour
         if (movementSM.currentState != attacking)
         {
             movementSM.ChangeState(attacking);
-            GameObject.Find("InventoryManager")?.SetActive(false);
         }
     }
 
@@ -130,7 +131,6 @@ public class Character : MonoBehaviour
         if (movementSM.currentState == attacking)
         {
             movementSM.ChangeState(combatting);
-            GameObject.Find("InventoryManager")?.SetActive(true);
         }
     }
 
