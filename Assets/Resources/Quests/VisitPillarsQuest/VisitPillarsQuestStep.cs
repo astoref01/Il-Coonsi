@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CircleCollider2D))]
+[RequireComponent(typeof(Collider))]
 public class VisitPillarsQuestStep : QuestStep
 {
     [Header("Config")]
@@ -14,7 +14,7 @@ public class VisitPillarsQuestStep : QuestStep
         ChangeState("", status);
     }
 
-    private void OnTriggerEnter2D(Collider2D otherCollider)
+    private void OnTriggerEnter(Collider otherCollider)
     {
         if (otherCollider.CompareTag("Player"))
         {

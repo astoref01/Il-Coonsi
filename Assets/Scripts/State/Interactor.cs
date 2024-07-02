@@ -22,12 +22,12 @@ public class Interactor : MonoBehaviour
         character = GetComponent<Character>();
         interactableNameText = FindObjectOfType<InteractableNameText>(); // Trova il componente InteractableNameText nella scena
         layerMask = LayerMask.GetMask("Interactable", "Enemy", "NPC");
-<<<<<<< HEAD
+//<<<<<<< HEAD
 
 
-=======
+//=======
         dialogueManager = FindObjectOfType<DialogueManager>(); // Trova il componente DialogManager nella scena
->>>>>>> origin/main
+//>>>>>>> origin/main
         interactAction = GetComponent<PlayerInput>().actions["Interact"];
         dialogueAction = GetComponent<PlayerInput>().actions["Dialogue"];
         interactAction.performed += Interact;

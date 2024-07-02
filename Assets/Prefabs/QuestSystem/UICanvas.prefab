@@ -3225,6 +3225,7 @@ MonoBehaviour:
   experienceRewardsText: {fileID: 5422235377995627430}
   levelRequirementsText: {fileID: 4179391442701121608}
   questRequirementsText: {fileID: 4050596066232965851}
+  character: {fileID: 0}
 --- !u!1 &8788482674827431543
 GameObject:
   m_ObjectHideFlags: 0
